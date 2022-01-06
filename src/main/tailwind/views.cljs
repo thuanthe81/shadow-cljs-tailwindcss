@@ -1,6 +1,10 @@
 (ns tailwind.views
   (:require [tailwind.events :as events]
-            [tailwind.db :as db]))
+            [tailwind.db :as db]
+            [clojure.string :as str]))
+
+(defn css-class [& args]
+  (str/join " " args))
 
 (defn public
   []
@@ -35,11 +39,13 @@
 
 (defn authenticated
   []
-  [:div {:class "h-screen flex overflow-hidden bg-white"}
+  [:div {:class "h-screen flex overflow-hidden bg-white text-base"}
    [:div {:class "hidden lg:flex lg:flex-shrink-0"}
     [:div {:class "flex flex-col w-64 border-r border-gray-200 pt-5 pb-4 bg-gray-100"}
-     [:div {:class "flex items-center flex-shrink-0 px-6"}
-      [:div {:class "text-center text-3xl font-bold text-gray-900"} "App"]]
+     [:div {:class (css-class "px-[5.125rem]"
+                              "flex items-center flex-shrink-0")}
+      [:div {:class (css-class "w-[1.123rem]"
+                               "text-center text-3xl font-bold text-gray-900")} "App"]]
      [:div {:class "h-0 flex-1 flex flex-col overflow-y-auto"}
       [:div {:class "px-3 mt-6 relative inline-block text-left"}
        [:div
@@ -69,7 +75,7 @@
                 :on-click #(events/logout)
                 :class "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" :role "menuitem"}
             "Logout"]]])]
-      [:nav {:class "px-3 mt-6"}
+      [:nav {:class "px-3 mt-6 avatar-padding"}
        [:div {:class "space-y-1"}
         [:a {:href "#" :class "bg-gray-200 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md"}
          [:svg {:class "text-gray-500 mr-3 h-6 w-6" :xmlns "http://www.w3.org/2000/svg" :fill "none" :viewBox "0 0 24 24" :stroke "currentColor" :aria-hidden "true"}

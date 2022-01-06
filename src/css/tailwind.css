@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.test-custom {
+    height: 320px;
+    width: 100vh;
+    @apply text-base;
+}
